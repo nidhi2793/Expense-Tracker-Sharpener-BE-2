@@ -16,6 +16,8 @@ app.use("/user", userRouter);
 sequelize
   .sync()
   .then((result) => {
-    app.listen(3000);
+    app.listen(3000, () => {
+      console.log("connected");
+    });
   })
   .catch((err) => console.log(err));
