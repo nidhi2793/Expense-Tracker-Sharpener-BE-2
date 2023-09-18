@@ -233,6 +233,7 @@ async function buyPremium(e) {
       alert(
         "Welcome to our Premium Membership, You have now access to Premium exclusive Reports and LeaderBoard"
       );
+      window.location.reload();
       localStorage.setItem("token", res.data.token);
     },
   };
@@ -250,12 +251,16 @@ async function isPremiumUser() {
     buyPremiumBtn.innerHTML = "Premium Member &#128081";
     reportsLink.removeAttribute("onclick");
     leaderboardLink.removeAttribute("onclick");
+    leaderboardLink.setAttribute("href", "/premium/getLeaderboardPage");
+    buyPremiumBtn.removeEventListener("click", buyPremium);
+  } else {
   }
 }
 
 buyPremiumBtn.addEventListener("click", buyPremium);
 addExpenseBtn.addEventListener("click", addExpense);
-document.addEventListener("DOMContentLoaded", isPremiumUser, getAllExpenses);
+document.addEventListener("DOMContentLoaded", isPremiumUser);
+document.addEventListener("DOMContentLoaded", getAllExpenses);
 table.addEventListener("click", (e) => {
   deleteExpense(e);
 });
