@@ -28,15 +28,11 @@ body {
 
 }
 
-/* #png {
 
-  margin-right: 10px;
-
-} */
 
 #form1 {
 
-  border-radius: 10px;
+ 
 
   background-color: #5C8374;
 
@@ -48,7 +44,6 @@ body {
 
 #table {
 
-  border-radius: 10px;
 
   background-color: #CBE4DE;
 
@@ -92,7 +87,7 @@ body {
 
   width: auto;
 
-  border-radius: 7px;
+  
 
   border: none;
 
