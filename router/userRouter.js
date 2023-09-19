@@ -11,6 +11,10 @@ router.get("/isPremiumUser", userAuthentication, userController.isPremiumUser);
 
 router.get("/getAllUsers", userController.getAllUsers);
 
+router.get("/resetPasswordPage", userController.resetPasswordPage);
+
+router.post("/sendMail", userController.sendMail);
+
 router.post("/login", userController.postUserLogin);
 
 router.post("/signUp", userController.postUserSignUp);

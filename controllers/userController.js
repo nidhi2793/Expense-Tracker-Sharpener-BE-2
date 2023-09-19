@@ -3,6 +3,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sequelize = require("../util/database");
+const Sib = require("sib-api-v3-sdk");
 
 function generateAccessToken(id, email) {
   return jwt.sign({ userId: id, email: email }, "eyJhbGciOiJIUzI1NiJ9");
@@ -119,6 +120,49 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+const resetPasswordPage = async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .sendFile(
+        path.join(__dirname, "../", "public", "views", "resetPassword.html")
+      );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const sendMail = async (req, res, next) => {
+  try {
+    const client = Sib.ApiClient.instance;
+    const apiKey = client.authentications["api-key"];
+    apiKey.apiKey = process.env.RESET_PASSWORD_API_KEY;
+    const transEmailApi = new Sib.TransactionalEmailsApi();
+    const sender = {
+      email: "nidhiagra1993@gmail.com",
+      name: "Nidhi",
+    };
+    const receivers = [
+      {
+        email: req.body.email,
+      },
+    ];
+    const emailResponse = await transEmailApi.sendTransacEmail({
+      sender,
+      To: receivers,
+      subject: "Expense Tracker Reset Password",
+      textContent: "Link Below",
+      // htmlContent: `<h3>link for reset the password</h3>`,
+    });
+    res.send(
+      `<script>alert('Check your mails, Link for reset the password is successfully send on your Mail Id!'); window.location.href='/'</script>`
+    );
+    res.redirect("/");
+  } catch (error) {
+    console.log("error");
+  }
+};
+
 module.exports = {
   generateAccessToken,
   getLoginPage,
@@ -126,4 +170,6 @@ module.exports = {
   postUserSignUp,
   isPremiumUser,
   getAllUsers,
+  resetPasswordPage,
+  sendMail,
 };
