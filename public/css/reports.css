@@ -105,3 +105,10 @@ body {
   background-color: #183D3D;
   border: none;
 }
+
+#dailyTotal,
+#dailyTotalAmount,
+#monthlyTotal,
+#monthlyTotalAmount {
+  font-weight: bolder !important;
+}
