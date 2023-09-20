@@ -11,6 +11,13 @@ router.get(
   userAuthentication,
   expenseController.getAllExpenses
 );
+
+router.get(
+  "/getAllExpenses/:page",
+  userAuthentication,
+  expenseController.getAllExpensesforPagination
+);
+
 router.get(
   "/deleteExpense/:id",
   userAuthentication,

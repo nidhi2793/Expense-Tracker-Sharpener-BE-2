@@ -168,3 +168,12 @@ body {
   color: white;
 
 }
+
+.page-link {
+  background-color: #183D3D;
+  color: white;
+}
+.page-link:hover {
+  background-color: #d2eaf7;
+  color: #5C8374;
+}
