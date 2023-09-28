@@ -60,5 +60,6 @@ sequelize
   .sync()
   .then((result) => {
     app.listen(process.env.PORT || 3000);
+    console.log("Sequelize running at ", process.env.PORT);
   })
   .catch((err) => console.log(err));
