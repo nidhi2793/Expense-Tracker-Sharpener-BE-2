@@ -56,6 +56,8 @@ Order.belongsTo(User);
 ResetPassword.belongsTo(User);
 User.hasMany(ResetPassword);
 
+console.log("Blah blah lah...");
+
 sequelize
   .sync()
   .then((result) => {
