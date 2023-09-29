@@ -56,7 +56,7 @@ async function addExpense() {
     const token = localStorage.getItem("token");
     const res = await axios
       .post(
-        `${process.env.BASE_URL}/expense/addExpense`,
+        `/expense/addExpense`,
         {
           date: dateStr,
           category: categoryValue,
@@ -83,10 +83,9 @@ async function getAllExpenses() {
   // e.preventDefault();
   try {
     const token = localStorage.getItem("token");
-    const res = await axios.get(
-      `${process.env.BASE_URL}/expense/getAllExpenses/1`,
-      { headers: { Authorization: token } }
-    );
+    const res = await axios.get(`/expense/getAllExpenses/1`, {
+      headers: { Authorization: token },
+    });
 
     res.data.expenses.forEach((expenses) => {
       const id = expenses.id;
@@ -255,10 +254,9 @@ async function editExpense(e) {
       let tr = e.target.parentElement.parentElement;
       let id = tr.children[0].textContent;
       //Fill the input values with the existing values
-      const res = await axios.get(
-        `${process.env.BASE_URL}/expense/getAllExpenses`,
-        { headers: { Authorization: token } }
-      );
+      const res = await axios.get(`/expense/getAllExpenses`, {
+        headers: { Authorization: token },
+      });
       res.data.forEach((expense) => {
         if (expense.id == id) {
           categoryValue.textContent = expense.category;
@@ -293,10 +291,9 @@ async function editExpense(e) {
 
 async function buyPremium(e) {
   const token = localStorage.getItem("token");
-  const res = await axios.get(
-    `${process.env.BASE_URL}/purchase/premiumMembership`,
-    { headers: { Authorization: token } }
-  );
+  const res = await axios.get(`/purchase/premiumMembership`, {
+    headers: { Authorization: token },
+  });
 
   var options = {
     key: res.data.key_id,
@@ -304,7 +301,7 @@ async function buyPremium(e) {
     // This handler function will handle the success payment
     handler: async function (response) {
       const res = await axios.post(
-        `${process.env.BASE_URL}/purchase/updateTransactionStatus`,
+        `/purchase/updateTransactionStatus`,
         {
           order_id: options.order_id,
           payment_id: response.razorpay_payment_id,
@@ -327,7 +324,7 @@ async function buyPremium(e) {
 
 async function isPremiumUser() {
   const token = localStorage.getItem("token");
-  const res = await axios.get(`${process.env.BASE_URL}/user/isPremiumUser`, {
+  const res = await axios.get(`/user/isPremiumUser`, {
     headers: { Authorization: token },
   });
   if (res.data.isPremiumUser) {

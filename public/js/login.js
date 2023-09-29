@@ -21,7 +21,7 @@ function login() {
   };
 
   axios
-    .post(`${process.env.BASE_URL}/user/login`, loginDetails)
+    .post(`/user/login`, loginDetails)
     .then((result) => {
       // alert(result.data.message);
       localStorage.setItem("token", result.data.token);

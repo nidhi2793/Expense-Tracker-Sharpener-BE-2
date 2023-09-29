@@ -22,7 +22,7 @@ async function getDailyReport(e) {
 
     let totalAmount = 0;
     const res = await axios.post(
-      `${process.env.BASE_URL}/reports/dailyReports`,
+      `/reports/dailyReports`,
       {
         date: formattedDate,
       },
@@ -92,7 +92,7 @@ async function getMonthlyReport(e) {
 
     let totalAmount = 0;
     const res = await axios.post(
-      `${process.env.BASE_URL}/reports/monthlyReports`,
+      `/reports/monthlyReports`,
       {
         month: formattedMonth,
       },
