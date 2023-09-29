@@ -1,9 +1,10 @@
 {
     "version": 2,
+    "buildCommand": "npm install -g node-gyp && npm run vercel-build",
     "builds": [
         {
             "src": "index.js",
-            "use": "@now/node"
+            "use": "@vercel/node"
         }
     ],
     "routes": [
