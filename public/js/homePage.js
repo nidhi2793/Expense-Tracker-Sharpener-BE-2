@@ -56,7 +56,7 @@ async function addExpense() {
     const token = localStorage.getItem("token");
     const res = await axios
       .post(
-        "http://localhost:3000/expense/addExpense",
+        `${process.env.BASE_URL}/expense/addExpense`,
         {
           date: dateStr,
           category: categoryValue,
@@ -84,7 +84,7 @@ async function getAllExpenses() {
   try {
     const token = localStorage.getItem("token");
     const res = await axios.get(
-      "http://localhost:3000/expense/getAllExpenses/1",
+      `${process.env.BASE_URL}/expense/getAllExpenses/1`,
       { headers: { Authorization: token } }
     );
 
@@ -256,7 +256,7 @@ async function editExpense(e) {
       let id = tr.children[0].textContent;
       //Fill the input values with the existing values
       const res = await axios.get(
-        "http://localhost:3000/expense/getAllExpenses",
+        `${process.env.BASE_URL}/expense/getAllExpenses`,
         { headers: { Authorization: token } }
       );
       res.data.forEach((expense) => {
@@ -294,7 +294,7 @@ async function editExpense(e) {
 async function buyPremium(e) {
   const token = localStorage.getItem("token");
   const res = await axios.get(
-    "http://localhost:3000/purchase/premiumMembership",
+    `${process.env.BASE_URL}/purchase/premiumMembership`,
     { headers: { Authorization: token } }
   );
 
@@ -304,7 +304,7 @@ async function buyPremium(e) {
     // This handler function will handle the success payment
     handler: async function (response) {
       const res = await axios.post(
-        "http://localhost:3000/purchase/updateTransactionStatus",
+        `${process.env.BASE_URL}/purchase/updateTransactionStatus`,
         {
           order_id: options.order_id,
           payment_id: response.razorpay_payment_id,
@@ -327,7 +327,7 @@ async function buyPremium(e) {
 
 async function isPremiumUser() {
   const token = localStorage.getItem("token");
-  const res = await axios.get("http://localhost:3000/user/isPremiumUser", {
+  const res = await axios.get(`${process.env.BASE_URL}/user/isPremiumUser`, {
     headers: { Authorization: token },
   });
   if (res.data.isPremiumUser) {
