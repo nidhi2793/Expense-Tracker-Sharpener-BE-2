@@ -4,8 +4,7 @@
     "builds": [
         {
             "src": "index.js",
-            "use": "@vercel/node",
-            "buildCommand": "npm install -g node-gyp && npm run vercel-build"
+            "use": "@vercel/node"
         }
     ],
     "routes": [
