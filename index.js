@@ -1,14 +1,11 @@
 const express = require("express");
 const app = express();
-const fs = require("fs");
-const path = require("path");
 
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 const sequelize = require("./util/database");
 const helmet = require("helmet");
-const morgan = require("morgan");
 
 const userRouter = require("./router/userRouter");
 const expenseRouter = require("./router/expenseRouter");
@@ -31,12 +28,6 @@ app.use(
     crossOriginEmbedderPolicy: false,
   })
 );
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
-
-app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use("/", userRouter);
 app.use("/user", userRouter);
