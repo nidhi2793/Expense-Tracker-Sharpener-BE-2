@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 
 const bodyParser = require("body-parser");
+var path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 const sequelize = require("./util/database");
 const helmet = require("helmet");
+var favicon = require("serve-favicon");
 
 const userRouter = require("./router/userRouter");
 const expenseRouter = require("./router/expenseRouter");
@@ -18,6 +20,7 @@ const Expense = require("./models/expenseModel");
 const Order = require("./models/ordersModel");
 const ResetPassword = require("./models/resetPasswordModel");
 
+app.use(favicon(__dirname + "/public/images/favicon.ico"));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -46,8 +49,6 @@ Order.belongsTo(User);
 
 ResetPassword.belongsTo(User);
 User.hasMany(ResetPassword);
-
-console.log("Blah blah lah...");
 
 sequelize
   .sync()
