@@ -162,10 +162,9 @@ async function paginationBtn(e) {
   try {
     const pageNo = e.target.textContent;
     const token = localStorage.getItem("token");
-    const res = await axios.get(
-      `http://localhost:3000/expense/getAllExpenses/${pageNo}`,
-      { headers: { Authorization: token } }
-    );
+    const res = await axios.get(`/expense/getAllExpenses/${pageNo}`, {
+      headers: { Authorization: token },
+    });
 
     table.innerHTML = "";
 
@@ -232,10 +231,9 @@ async function deleteExpense(e) {
     if (e.target.classList.contains("delete")) {
       let tr = e.target.parentElement.parentElement;
       let id = tr.children[0].textContent;
-      const res = await axios.get(
-        `http://localhost:3000/expense/deleteExpense/${id}`,
-        { headers: { Authorization: token } }
-      );
+      const res = await axios.get(`/expense/deleteExpense/${id}`, {
+        headers: { Authorization: token },
+      });
       window.location.reload();
     }
   } catch {
@@ -271,7 +269,7 @@ async function editExpense(e) {
             e.preventDefault();
             console.log("request to backend for edit");
             const res = await axios.post(
-              `http://localhost:3000/expense/editExpense/${id}`,
+              `/expense/editExpense/${id}`,
               {
                 category: categoryValue.textContent.trim(),
                 description: descriptionValue.value,

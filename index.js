@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 
 const bodyParser = require("body-parser");
-var path = require("path");
+const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 const sequelize = require("./util/database");
 const helmet = require("helmet");
-var favicon = require("serve-favicon");
+const favicon = require("serve-favicon");
 
 const userRouter = require("./router/userRouter");
 const expenseRouter = require("./router/expenseRouter");
